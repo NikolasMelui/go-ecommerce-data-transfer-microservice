@@ -3,12 +3,7 @@ package source
 import (
 	"encoding/xml"
 	"fmt"
-
-	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/cconfig"
 )
-
-// ProductsURL ...
-var ProductsURL = cconfig.Config.SourceURL + "/products"
 
 type stock struct {
 	XMLName     xml.Name `xml:"Склад"`
