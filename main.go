@@ -8,16 +8,17 @@ import (
 
 	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/cache"
 	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/cconfig"
-	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/source"
+	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/entity"
 )
 
 func main() {
 
-	sourceClient := source.NewClient()
+	sourceClient := entity.NewClient(cconfig.Config.SourceURL)
+	targetClient := entity.NewClient(cconfig.Config.TargetURL)
 
-	var productsResponse source.ProductsResponse
+	var productsResponse entity.ProductsResponse
 
-	err := sourceClient.GetData("/products", &productsResponse)
+	err := sourceClient.Get("/products", &productsResponse)
 	if err != nil {
 		log.Fatalf("Error: %v", err.Error())
 	}
@@ -55,6 +56,14 @@ func main() {
 			if err != nil {
 				log.Fatalf("Error: %v", err.Error())
 			}
+
+			productToSet := product.GetDataToSet()
+
+			err = targetClient.Set("/products", productToSet)
+			if err != nil {
+				log.Fatalf("Error: %v", err.Error())
+			}
+
 		}
 
 		time.Sleep(50 * time.Millisecond)
