@@ -4,7 +4,7 @@ import (
 	"crypto/sha256"
 	"fmt"
 
-	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/entity"
+	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/source"
 )
 
 // Cachable ...
@@ -15,7 +15,7 @@ type Cachable interface {
 
 // ProductCache ...
 type ProductCache struct {
-	Data entity.Product
+	Data source.Product
 	Hash string
 }
 

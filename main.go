@@ -13,7 +13,7 @@ import (
 
 	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/cache"
 	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/cconfig"
-	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/entity"
+	"github.com/nikolasmelui/go-ecommerce-data-transfer-microservice/source"
 )
 
 type errorResponse struct {
@@ -22,7 +22,7 @@ type errorResponse struct {
 }
 
 func main() {
-	req, err := http.NewRequest("GET", entity.ProductsURL, nil)
+	req, err := http.NewRequest("GET", source.ProductsURL, nil)
 	if err != nil {
 		log.Fatalf("Error: %v", err.Error())
 	}
@@ -50,7 +50,7 @@ func main() {
 	}
 
 	body, _ := ioutil.ReadAll(res.Body)
-	var productsResponse entity.ProductsResponse
+	var productsResponse source.ProductsResponse
 	err = xml.Unmarshal(body, &productsResponse)
 	if err != nil {
 		log.Fatalf("Error: %v", err.Error())
