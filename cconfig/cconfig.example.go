@@ -1,4 +1,4 @@
-// package cconfig
+package cconfig
 
 // type customConfig struct {
 // 	SourceURL               string
